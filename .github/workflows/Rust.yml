@@ -63,4 +63,6 @@ jobs:
         run: cargo build --verbose
         
       - name: Run Tests
+        env:
+            DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
         run: cargo test --all --verbose

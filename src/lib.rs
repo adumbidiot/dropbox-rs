@@ -112,7 +112,11 @@ mod test {
     use super::*;
     use once_cell::sync::Lazy;
 
-    static TOKEN: Lazy<String> = Lazy::new(|| std::fs::read_to_string("token.txt").unwrap());
+    static TOKEN: Lazy<String> = Lazy::new(|| {
+        std::env::var_os("DROPBOX_TOKEN")
+            .map(|token| token.into_string().expect("DROPBOX_TOKEN is not unicode"))
+            .unwrap_or_else(|| std::fs::read_to_string("token.txt").unwrap())
+    });
 
     #[tokio::test]
     async fn sharing_list_folders() {
