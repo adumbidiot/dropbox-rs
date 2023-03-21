@@ -110,12 +110,13 @@ pub struct ListFolderResult {
 #[cfg(test)]
 mod test {
     use super::*;
+    use once_cell::sync::Lazy;
 
-    const TOKEN: &str = include_str!("../token.txt");
+    const TOKEN: Lazy<String> = Lazy::new(|| std::fs::read_to_string("token.txt").unwrap());
 
     #[tokio::test]
     async fn sharing_list_folders() {
-        let client = Client::new(TOKEN);
+        let client = Client::new(&TOKEN);
         let results = client
             .sharing_list_folders(&Default::default())
             .await
@@ -125,7 +126,7 @@ mod test {
 
     #[tokio::test]
     async fn list_folder() {
-        let client = Client::new(TOKEN);
+        let client = Client::new(&TOKEN);
         let results = client
             .list_folder(&ListFolderArg { path: "".into() })
             .await
