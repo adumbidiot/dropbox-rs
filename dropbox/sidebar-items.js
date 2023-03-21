@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Error","Error"]],"struct":[["Client","The Client"],["ListFolderArg","Args for listing a folder"],["ListFolderResult","The result for listing a folder"],["ListFoldersArgs","Args for listing shared folders"],["ListFoldersResult","The result for listing shared folders"]]};
